@@ -1,12 +1,34 @@
-package kr.co.tripmate.web;
+package kr.co.tripmate.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "tbl_user")
 public class User {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	
+	@Column(name = "userId", nullable = false, length = 20)
 	private String userId;
 	private String password;
 	private String name;
 	private String email;
 	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getUserId() {
 		return userId;
 	}
