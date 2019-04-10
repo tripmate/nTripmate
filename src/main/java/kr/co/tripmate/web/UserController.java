@@ -42,13 +42,13 @@ public class UserController {
 			return "redirect:/users/loginForm";
 		}
 		
-		if ( !password.equals(user.getPassword()) ) {
+		if ( !user.isMatchPassword(password) ) {
 			System.out.println("Login Failure!!");
 			return "redirect:/users/loginForm";
 		}
 		
 		System.out.println("Login Success!!");
-		session.setAttribute("sessionUser", user);
+		session.setAttribute(HttpSessionUtils.USER_SESSION_KEY, user);
 		
 		return "redirect:/";
 		
@@ -94,13 +94,15 @@ public class UserController {
 	@GetMapping(value = "/{id}/form")
 	public String updateForm(@PathVariable Long id, Model model, HttpSession session) {
 		
-		User sessionUser = (User) session.getAttribute("sessionUser");
+		// User sessionUser = (User) session.getAttribute("sessionUser");
 		
-		if ( sessionUser == null ) {
+		if ( HttpSessionUtils.isLoginUser(session) ) {
 			return "redirect:/users/loginForm";
 		}
 		
-		if ( !id.equals(sessionUser.getId()) ) {
+		User sessionUser = HttpSessionUtils.getUserFromSession(session);
+		
+		if ( sessionUser.isMatchId(id) ) {
 			throw new IllegalStateException("자신의 정보만 수정할 수 있습니다.");
 		}
 		
@@ -115,11 +117,13 @@ public class UserController {
 	@PutMapping(value = "/{id}")
 	public String update(@PathVariable Long id, User user, HttpSession session) {
 		
-		User sessionUser = (User) session.getAttribute("sessionUser");
+		// User sessionUser = (User) session.getAttribute("sessionUser");
 		
-		if ( sessionUser == null ) {
+		if ( HttpSessionUtils.isLoginUser(session) ) {
 			return "redirect:/users/loginForm";
 		}
+		
+		User sessionUser = HttpSessionUtils.getUserFromSession(session);
 		
 		if ( !id.equals(sessionUser.getId()) ) {
 			throw new IllegalStateException("자신의 정보만 수정할 수 있습니다.");
