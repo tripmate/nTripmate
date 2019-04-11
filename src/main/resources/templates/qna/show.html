@@ -80,7 +80,7 @@
 								</div>
 							</article>
 							{{/answers}}
-							<form class="submit-write" method="post" action="/questions/{{id}}/answers">
+							<form class="answer-write" method="post" action="/api/questions/{{id}}/answers">
 								<div class="form-group" style="padding:14px;">
 									<textarea class="form-control" placeholder="Update your status" name="contents"></textarea>
 								</div>
@@ -116,9 +116,9 @@
 				<a class="link-modify-article" href="/api/qna/updateAnswer/{3}">수정</a>
 			</li>
 			<li>
-				<form class="delete-answer-form" action="/api/questions/{3}/answers/{4}" method="POST">
-					<input type="hidden" name="_method" value="DELETE">
-                     <button type="submit" class="delete-answer-button">삭제</button>
+				<form class="delete-answer-form" action="/api/questions/{3}/answers/{4}" method="post">
+					<input type="hidden" name="_method" value="delete">
+					<button type="submit" class="delete-answer-button">삭제</button>
 				</form>
 			</li>
 		</ul>

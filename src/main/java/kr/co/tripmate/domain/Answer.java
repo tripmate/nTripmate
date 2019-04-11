@@ -13,22 +13,28 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 @Table(name = "tbl_answer")
 public class Answer {
 
 	@Id
-	@GeneratedValue(generator = "seq_answer", strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(generator = "seq_answer", strategy = GenerationType.IDENTITY)
+	@JsonProperty
 	private Long id;
 	
 	@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(name = "fk_answer_question"))
+	@JsonProperty
 	private Question question;
 	
 	@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(name = "fk_answer_writer"))
+	@JsonProperty
 	private User writer;
 //	@Lob
+	@JsonProperty
 	private String contents;
 	private LocalDateTime regdate;
 	

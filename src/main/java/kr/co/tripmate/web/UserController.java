@@ -1,7 +1,5 @@
 package kr.co.tripmate.web;
 
-import java.util.Optional;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;

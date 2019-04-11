@@ -1,7 +1,6 @@
 package kr.co.tripmate.web;
 
 import javax.servlet.http.HttpSession;
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +19,6 @@ import kr.co.tripmate.domain.User;
 
 @Controller
 @RequestMapping(value = "/questions")
-@Transactional
 public class QuestionController {
 	
 	@Autowired
