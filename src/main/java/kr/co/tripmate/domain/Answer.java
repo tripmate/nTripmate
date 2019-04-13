@@ -54,6 +54,10 @@ public class Answer {
 		
 		return regdate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 	}
+	
+	public boolean isWriter(User loginUser) {
+		return loginUser.equals(this.writer);
+	}
 
 
 	@Override

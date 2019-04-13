@@ -17,6 +17,30 @@ $('.answer-write').find('input[type="submit"]').on('click', function(e) {
 	});
 });
 
+$('a.link-delete-article').on('click', function(e) {
+	e.preventDefault();
+	
+	var that = $(this);
+	var url = that.attr('href');
+	
+	$.ajax({
+		type: 'delete',
+		url: url,
+		dataType: 'json',
+		error: function(xhr, status) {
+			console.log('error')
+		},
+		success: function(data, status) {
+			if ( !data.valid ) {
+				alert(data.errorMessage);
+				return;
+			}
+			
+			that.closest('article').remove();
+		}
+	});
+});
+
 function onError() {
 	
 }
@@ -25,6 +49,7 @@ function onSuccess(data, status) {
 	console.log(data);
 	
 	var answerTemplate = $('#answerTemplate').html();
+	//var template = answerTemplate.format(data.writer.userId, data.formattedRegdate, data.contents, data.question.id, data.id);
 	var template = answerTemplate.format(data.writer.userId, data.formattedRegdate, data.contents, data.question.id, data.id);
 	
 	$('.qna-comment-slipp-articles').find('article').last().append(template);

@@ -70,6 +70,10 @@ public class Question {
 		this.contents = contents;
 	}
 	
+	public int getAnswerCount() {
+		return answers.size();
+	}
+	
 	public String getFormattedRegdate() {
 		if ( regdate == null ) {
 			return "";
